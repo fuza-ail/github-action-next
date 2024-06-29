@@ -1,0 +1,12 @@
+name: Deployment App
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  init-process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: echo "Initializing Deployment Process"

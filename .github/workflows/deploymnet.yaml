@@ -51,9 +51,9 @@ jobs:
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 400 key.pem
-          scp -o StrictHostKeyChecking=no -i key.pem -r ./* $USERNAME@$HOST:/home/$USERNAME/next-app
+          scp -o StrictHostKeyChecking=no -i key.pem -r ./* ~/next-app
           ssh -o StrictHostKeyChecking=no -i key.pem $USERNAME@$HOST << 'EOF'
-            cd /home/$USERNAME/next-app
+            cd ~/next-app
             npm install
             npm run build
             npm run start

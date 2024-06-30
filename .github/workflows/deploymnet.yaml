@@ -55,7 +55,8 @@ jobs:
           USERNAME: ${{ secrets.EC2_USER }}
         run: |
           echo "$SSH_PRIVATE_KEY" > key.pem
-          chmod 644 key.pem
+          chmod 600 key.pem
+          ls -l key.pem
           echo "Copying files to EC2 instance"
           scp -o StrictHostKeyChecking=no -i key.pem -r ./* $USERNAME@$HOST:~/next-app
           echo SSH to Instance

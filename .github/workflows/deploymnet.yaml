@@ -47,9 +47,10 @@ jobs:
           HOST: ${{ secrets.EC2_HOST }}
           USERNAME: ${{ secrets.EC2_USER }}
         run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 400 key.pem
-          ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
           scp -o StrictHostKeyChecking=no -i key.pem -r ./* $USERNAME@$HOST:/home/$USERNAME/next-app
           ssh -o StrictHostKeyChecking=no -i key.pem $USERNAME@$HOST << 'EOF'
             cd /home/$USERNAME/next-app

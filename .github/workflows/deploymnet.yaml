@@ -45,10 +45,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-      - name: Install dependencies
-        run: npm install
-      - name: Build project
-        run: npm run build
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Build project
+      #   run: npm run build
       - name: Create SSH directory
         run: mkdir -p ~/.ssh
       - name: Add SSH Host Key
@@ -65,10 +65,10 @@ jobs:
           # Use scp to copy files to the EC2 instance
           scp -o StrictHostKeyChecking=no -i key.pem -r ./* $USERNAME@$HOST:/home/$USERNAME/next-app
 
-          # Use ssh to run commands on the EC2 instance
-          ssh -o StrictHostKeyChecking=no -i key.pem $USERNAME@$HOST << 'EOF'
-            cd /home/$USERNAME/next-app
-            npm install
-            npm run build
-            npm run start
-          EOF
+          # # Use ssh to run commands on the EC2 instance
+          # ssh -o StrictHostKeyChecking=no -i key.pem $USERNAME@$HOST << 'EOF'
+          #   cd /home/$USERNAME/next-app
+          #   npm install
+          #   npm run build
+          #   npm run start
+          # EOF

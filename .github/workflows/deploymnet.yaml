@@ -65,10 +65,8 @@ jobs:
           # Use scp to copy files to the EC2 instance
           scp -o StrictHostKeyChecking=no -i key.pem -r ./* $USERNAME@$HOST:/home/$USERNAME/next-app
 
-          # # Use ssh to run commands on the EC2 instance
-          ssh -o StrictHostKeyChecking=no -i key.pem $USERNAME@$HOST << 'EOF'
-            cd /home/$USERNAME/next-app
-            npm install
-            npm run build
-            pm2 restart next-app || pm2 start npm --name "next-app" -- star
-          EOF
+          # Use ssh to run commands on the EC2 instance
+          cd /home/$USERNAME/next-app
+          npm install
+          npm run build
+          pm2 restart next-app || pm2 start npm --name "next-app" -- start
